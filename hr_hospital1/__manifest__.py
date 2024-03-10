@@ -1,13 +1,21 @@
 {
-    'name': 'Hospital Management System',
+    'name': 'Hospital Management',
+    'version': '1.0.0',
+    'category': 'Hospital',
     'author': 'Viktor',
+    'sequence': -100,
     'website': 'www.odoo.tech',
-    'summary': 'Odoo 17 Development',
-    'depends': ['mail'],
+    'summary': 'Hospital management system',
+    'depends': ['base', 'mail'],
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'data/sequence.xml',
         'views/menu.xml',
+        'views/doctor.xml',
         'views/patient.xml',
-    ]
+        'views/female_patient.xml',
+        'views/appointment.xml',
+    ],
+    'demo': [],
+    'application': True,
 }
