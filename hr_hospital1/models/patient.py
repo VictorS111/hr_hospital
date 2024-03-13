@@ -17,6 +17,8 @@ class HospitalPatient(models.Model):
     capitalized_name = fields.Char(string='Capitalized Name', compute='_compute_capitalized_name', store=True)
     ref = fields.Char(string="Reference", default=lambda self: _('New'))
     active = fields.Boolean(string="Active", default=True)
+    appointment_id = fields.Many2one(comodel_name='hospital.appointment', string="Appointments")
+
 
     doctor_id = fields.Many2one('hospital.doctor', string='Doctors')
     # doctor_id = fields.Char(related='hospital.doctor', string='Doctors')

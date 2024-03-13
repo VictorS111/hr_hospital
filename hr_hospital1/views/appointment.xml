@@ -6,16 +6,43 @@
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <field name="state" widget="statusbar" nolabel="1" options="{'clickable': '1'}"
+                           statusbar_visible="draft,in_consultation,done"/>
+                </header>
                 <sheet>
+                    <div>
+                        <h2>
+                            <field name="priority" widget="priority"/>
+                        </h2>
+                    </div>
                     <group>
                         <field name="patient_id"/>
                         <field name="ref"/>
                         <field name="gender"/>
-                        <field name="booking_date"/>
+                        <field name="booking_date" help="Date of booking"/>
                     </group>
                     <group>
                         <field name="appointment_time"/>
+                        <button name="action_test" string="Object_Button" type="object"
+                                help="A message will be printed in the log"
+                                confirm="Are you sure to execute python code ?"
+                                class="oe_highlight"/>
+                        <button name="%(hr_hospital1.action_hospital_patient)d" string="Action_Button"
+                                help="On clicking this button, you will be redirected to patient records"
+                                confirm="Are you sure to open patient action ?"
+                                type="action" class="oe_highlight"/>
                     </group>
+
+                    <notebook>
+                        <page string="Prescription" name="prescription">
+                            <field name="prescription" placeholder="Enter your prescription"/>
+                        </page>
+                        <page string="Pharmacy" name="pharmacy">
+                        </page>
+                    </notebook>
+
+
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" groups="base.group_user"/>
@@ -26,14 +53,30 @@
         </field>
     </record>
 
+    <!--        decoration-success - green-->
+    <!--        decoration-info - light blue-->
+    <!--        decoration-warning - orange-->
+    <!--        decoration-danger - red-->
+    <!--        decoration-mutes - no color-->
+
     <record id="view_hospital_appointment_tree" model="ir.ui.view">
         <field name="name">hospital.appointment.tree</field>
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-success="state == 'done'" decoration-danger="state == 'cancel'"
+                  decoration-warning="state == 'in_consultation'" decoration-info="state == 'draft'">
                 <field name="patient_id"/>
+                <field name="ref" optional="hide"/>
+                <field name="gender" optional="hide"/>
                 <field name="appointment_time"/>
-                <field name="booking_date"/>
+                <field name="booking_date" optional="show"/>
+                <field name="activity_ids" widget="list_activity"/>
+                <field name="state"
+                       decoration-success="state == 'done'"
+                       decoration-info="state == 'draft'"
+                       decoration-warning="state == 'in_consultation'"
+                       decoration-danger="state == 'cancel'"
+                       widget="badge"/>
             </tree>
         </field>
     </record>
@@ -48,7 +91,7 @@
     </record>
 
     <record id="action_hospital_appointment" model="ir.actions.act_window">
-        <field name="name">Appointment</field>
+        <field name="name">Appointments</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hospital.appointment</field>
         <field name="view_mode">tree,form</field>
@@ -63,7 +106,7 @@
 
     <menuitem
             id="menu_appointment"
-            name="Appointment"
+            name="Appointments"
             parent="menu_appointment_master"
             action="action_hospital_appointment"
             sequence="10"/>
