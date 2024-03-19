@@ -6,10 +6,11 @@
     'sequence': -100,
     'website': 'www.odoo.tech',
     'summary': 'Hospital management system',
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail', 'product'],
     'data': [
         'security/ir.model.access.csv',
         'data/sequence.xml',
+        'wizard/create_appointment_view.xml',
         'views/menu.xml',
         'views/doctor.xml',
         'views/patient.xml',

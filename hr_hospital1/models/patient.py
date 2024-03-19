@@ -18,10 +18,14 @@ class HospitalPatient(models.Model):
     ref = fields.Char(string="Reference", default=lambda self: _('New'))
     active = fields.Boolean(string="Active", default=True)
     appointment_id = fields.Many2one(comodel_name='hospital.appointment', string="Appointments")
-
+    appointment_count = fields.Integer(string='Appointment Count', compute='_compute_appointment_count')
 
     doctor_id = fields.Many2one('hospital.doctor', string='Doctors')
     # doctor_id = fields.Char(related='hospital.doctor', string='Doctors')
+
+    def _compute_appointment_count(self):
+        appointment_count = self.env['hospital.appointment'].search_count([('patient_id', '=', self.id)])
+        self.appointment_count = appointment_count
 
     @api.depends('date_of_birth')
     def _compute_age(self):
