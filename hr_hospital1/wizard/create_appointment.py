@@ -5,11 +5,32 @@ from odoo.exceptions import ValidationError
 
 class CreateAppointmentWizard(models.TransientModel):
     _name = "create.appointment.wizard"
-    _description = "CreateAppointmentWizard"
+    _description = "Create Appointment Wizard"
 
-    name = fields.Char(string='Name', required=True)
+    booking_date = fields.Date(string='Booking Date', required=False)
     patient_id = fields.Many2one('hospital.patient', string="Patient", required=True)
 
     def action_create_appointment(self):
         print('Button Is Clicked')
+        vals = {
+            'patient_id': self.patient_id.id,
+            'booking_date': self.booking_date,
+        }
+        appointment_rec = self.env['hospital.appointment'].create(vals)
+        print("appointment_id", appointment_rec)
+        return {
+            'name': _('Appointment'),
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'res_model': 'hospital.appointment',
+            'res_id': appointment_rec.id,
+            'target': 'new',
+        }
+
+    # def action_view_appointment(self):
+    #     action = self.env.ref('hr_hospital1.action_hospital_appointment').read()[0]
+    #     action['domain'] = [('patient_id', '=', self.patient_id.id)]
+    #     # action = self.env['ir.actions.actions']._for_xml_id("hr_hospital1.action_hospital_appointment")
+    #     # action['domain'] = [('patient_id', '=', self.patient_id.id)
+    #     return action
 

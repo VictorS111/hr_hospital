@@ -3,21 +3,23 @@ from odoo import api, fields, models, _
 
 class HospitalDoctor(models.Model):
     _name = "hospital.doctor"
-    _inherit = "mail.thread"
-    _description = "Doctor Records"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _description = "Hospital Doctor"
+    _rec_name = 'doctor_name'
 
-    _rec_name = 'ref'
-
-    name = fields.Char(string='Name', required=True, tracking=True)
+    doctor_name = fields.Char(string='Name', required=True, tracking=True)
+    age = fields.Integer(string="Age", tracking=True)
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')],
-                              string="Gender", tracking=True)
-    ref = fields.Char(string="Reference", required=True)
+                              required=True, string="Gender", default='male', tracking=True)
+    # ref = fields.Char(string="Reference", required=True)
+    notes = fields.Text(string="Notes", copy=False)
+    image = fields.Binary(string="Patient Image")
 
-    # user_id = fields.Many2one('res.users', string='Related User')
-    # patient_id = fields.One2many('hospital.patient', string='Related Patient')
-    # related_patient_id = fields.Many2one('hospital.patient', string='Related Patient ID')
-    # @api.model
-    # def create(self, vals):
-    #     vals['name'] = self.env['ir.sequence'].next_by_code('doctors.sequence')
-    #     result = super(HospitalDoctor, self).create(vals)
-    #     return result
+    def copy(self, default=None):
+        if default is None:
+            default = {}
+        if not default.get('doctor_name'):
+            default['doctor_name'] = _("%s (copy)", self.doctor_name)
+        return super(HospitalDoctor, self).copy(default)
+
+

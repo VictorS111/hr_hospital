@@ -19,4 +19,16 @@
             parent="menu_hospital_root"
             sequence="0"/>
 
+    <menuitem
+            id="menu_doctor_master"
+            name="Doctors"
+            parent="menu_hospital_root"
+            sequence="0"/>
+
+    <menuitem
+            id="menu_disease_master"
+            name="Disease"
+            parent="menu_hospital_root"
+            sequence="0"/>
+
 </odoo>

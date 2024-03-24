@@ -1,4 +1,5 @@
 from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class HospitalAppointment(models.Model):
@@ -6,12 +7,14 @@ class HospitalAppointment(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Hospital Appointment"
     _rec_name = 'ref'
+    _order = "ref desc"
 
     patient_id = fields.Many2one(comodel_name='hospital.patient', string="Patient")
     gender = fields.Selection(related='patient_id.gender')
     appointment_time = fields.Datetime(string="Appointment Time", default=fields.Datetime.now)
     booking_date = fields.Date(string="Booking Date", default=fields.Date.context_today)
-    ref = fields.Char(string="Reference", help="Reference from patient record")
+    ref = fields.Char(string="Reference", help="Reference from patient record",
+                      default=lambda self: _('New'))
     prescription = fields.Html(string="Prescription")
     priority = fields.Selection([
         ('0', 'Normal'),
@@ -24,8 +27,10 @@ class HospitalAppointment(models.Model):
         ('done', 'Done'),
         ('cancel', 'Cancelled')], default='draft', string="Status", required=True)
     doctor_id = fields.Many2one('res.users', string="Doctor", tracking=True)
+    doctor2_id = fields.Many2one('hospital.doctor', string="Doctor_2", tracking=True)
     pharmacy_line_ids = fields.One2many('appointment.pharmacy.lines',
                                         'appointment_id', string='Pharmacy Lines')
+    notes = fields.Text(string="Notes")
 
     @api.onchange('patient_id')
     def onchange_patient_id(self):
@@ -49,6 +54,12 @@ class HospitalAppointment(models.Model):
     def action_draft(self):
         for rec in self:
             rec.state = 'draft'
+
+    def unlink(self):
+        print("Deleting the Record")
+        if self.state == 'done':
+            raise ValidationError("You Cannot Delete %s as it is in Done State" % self.patient_id.ref)
+        return super(HospitalAppointment, self).unlink()
 
 class AppointmentPharmacyLines(models.Model):
     _name = "appointment.pharmacy.lines"

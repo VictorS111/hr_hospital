@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="disease_flu" model="disease">
+        <field name="name">Flu</field>
+    </record>
+
+    <record id="disease_cold" model="disease">
+        <field name="name">Cold</field>
+    </record>
+
+    <record id="disease_fever" model="disease">
+        <field name="name">Fever</field>
+        <field name="parent_id" ref="disease_flu"/>
+    </record>
+
+     <record id="disease_cough" model="disease">
+        <field name="name">Cough</field>
+        <field name="parent_id" ref="disease_flu"/>
+    </record>
+
+</odoo>

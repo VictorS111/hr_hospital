@@ -7,6 +7,13 @@ class HospitalPatient(models.Model):
     _name = "hospital.patient"
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Hospital Patient"
+    _order = "id desc"
+
+    @api.model
+    def default_get(self, fields):
+        res = super(HospitalPatient, self).default_get(fields)
+        res['notes'] = 'Test Default Get Method'
+        return res
 
     name = fields.Char(string='Name', required=True, tracking=True)
     date_of_birth = fields.Date(string='Date Of Birth')
@@ -19,9 +26,12 @@ class HospitalPatient(models.Model):
     active = fields.Boolean(string="Active", default=True)
     appointment_id = fields.Many2one(comodel_name='hospital.appointment', string="Appointments")
     appointment_count = fields.Integer(string='Appointment Count', compute='_compute_appointment_count')
+    image = fields.Binary(string="Patient Image")
 
-    doctor_id = fields.Many2one('hospital.doctor', string='Doctors')
+    doctor2_id = fields.Many2one('hospital.doctor', string='Doctors')
     # doctor_id = fields.Char(related='hospital.doctor', string='Doctors')
+    appointment_ids = fields.One2many('hospital.appointment', 'patient_id',
+                                      string="Appointments")
 
     def _compute_appointment_count(self):
         appointment_count = self.env['hospital.appointment'].search_count([('patient_id', '=', self.id)])
@@ -46,7 +56,14 @@ class HospitalPatient(models.Model):
     def _check_child_age(self):
         for rec in self:
             if rec.is_child and rec.age == 0:
-                raise ValidationError(_("Age has to be recorded !"))
+                raise ValidationError(_("Age Cannot Be Zero!"))
+
+    @api.constrains('name')
+    def check_name(self):
+        for rec in self:
+            patients = self.env['hospital.patient'].search([('name', '=', rec.name), ('id', '!=', rec.id)])
+            if patients:
+                raise ValidationError("Name %s Already Exists" % rec.name)
 
     @api.depends('name')
     def _compute_capitalized_name(self):
@@ -68,3 +85,12 @@ class HospitalPatient(models.Model):
         for rec in self:
             if rec.doctor_id:
                 rec.gender_id = rec.doctor_id.gender
+
+    # def name_get(self):
+    #     result = []
+    #     for rec in self:
+    #         name = '[' + rec.gender + ']' + rec.name
+    #         result.append((rec.id, name))
+    #     return result
+
+
