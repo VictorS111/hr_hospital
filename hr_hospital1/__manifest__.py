@@ -21,7 +21,13 @@
         'report/patient_details_template.xml',
         'report/patient_card.xml',
         'report/report.xml',
+        # 'demo/disease_demo.xml',
+        # 'demo/doctor_demo.xml',
     ],
-    'demo': ['demo/disease_demo.xml'],
+    'demo': [
+        'demo/disease_demo.xml',
+        'demo/doctor_demo.xml',
+        'demo/patient_demo.xml',
+    ],
     'application': True,
 }

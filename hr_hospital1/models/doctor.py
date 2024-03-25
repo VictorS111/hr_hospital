@@ -12,6 +12,11 @@ class HospitalDoctor(models.Model):
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')],
                               required=True, string="Gender", default='male', tracking=True)
     # ref = fields.Char(string="Reference", required=True)
+    specialty = fields.Char()
+    doctor_role = fields.Selection([
+        ('intern', 'Intern'),
+        ('mentor', 'Doctor Mentor')
+    ])
     notes = fields.Text(string="Notes", copy=False)
     image = fields.Binary(string="Patient Image")
 

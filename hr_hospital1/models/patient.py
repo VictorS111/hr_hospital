@@ -28,7 +28,8 @@ class HospitalPatient(models.Model):
     appointment_count = fields.Integer(string='Appointment Count', compute='_compute_appointment_count')
     image = fields.Binary(string="Patient Image")
 
-    doctor2_id = fields.Many2one('hospital.doctor', string='Doctors')
+    doctor2_id = fields.Many2one('hospital.doctor', string='Doctors',
+                                 domain="[('doctor_role', '!=', 'intern')]")
     # doctor_id = fields.Char(related='hospital.doctor', string='Doctors')
     appointment_ids = fields.One2many('hospital.appointment', 'patient_id',
                                       string="Appointments")

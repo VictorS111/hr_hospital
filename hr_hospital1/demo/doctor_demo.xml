@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="doctor1" model="hospital.doctor">
+        <field name="doctor_name">Ivan Fedorovych</field>
+        <field name="age">57</field>
+        <field name="gender">male</field>
+    </record>
+
+    <record id="doctor2" model="hospital.doctor">
+        <field name="doctor_name">Oleg Stepanovych</field>
+        <field name="age">59</field>
+        <field name="gender">male</field>
+    </record>
+
+    <record id="doctor3" model="hospital.doctor">
+        <field name="doctor_name">Vasyl Myhaylovych</field>
+        <field name="age">44</field>
+        <field name="gender">male</field>
+    </record>
+
+     <record id="doctor4" model="hospital.doctor">
+        <field name="doctor_name">Katya</field>
+         <field name="age">32</field>
+        <field name="gender">female</field>
+    </record>
+
+</odoo>

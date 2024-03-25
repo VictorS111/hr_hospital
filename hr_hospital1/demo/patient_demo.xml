@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record id="patient1" model="hospital.patient">
+        <field name="name">Danylo</field>
+<!--        <field name="date_of_birth"></field>-->
+        <field name="gender">male</field>
+    </record>
+
+    <record id="patient2" model="hospital.patient">
+        <field name="name">Tanya</field>
+<!--        <field name="date_of_birth"></field>-->
+        <field name="gender">female</field>
+    </record>
+
+    <record id="patient3" model="hospital.patient">
+        <field name="name">Igor</field>
+<!--        <field name="date_of_birth"></field>-->
+        <field name="gender">male</field>
+    </record>
+
+     <record id="patient4" model="hospital.patient">
+        <field name="name">Yana</field>
+<!--        <field name="date_of_birth"></field>-->
+        <field name="gender">female</field>
+    </record>
+
+</odoo>

@@ -5,4 +5,4 @@ class Disease(models.Model):
 
     name = fields.Char(string='Name', required=True, tracking=True)
     description = fields.Text()
-    # parent_id = fields.Many2one('disease')
+    parent_id = fields.Many2one('disease')
