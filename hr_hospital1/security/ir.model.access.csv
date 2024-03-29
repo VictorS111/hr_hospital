@@ -3,6 +3,10 @@ access.hospital.patient,access_hospital_patient,hr_hospital1.model_hospital_pati
 access.hospital.doctor,access_hospital_doctor,hr_hospital1.model_hospital_doctor,base.group_user,1,1,1,1
 access.hospital.appointment,access_hospital_appointment,hr_hospital1.model_hospital_appointment,base.group_user,1,1,1,1
 access.disease,access_disease,hr_hospital1.model_disease,base.group_user,1,1,1,1
+access.person,access_person,hr_hospital1.model_person,base.group_user,1,1,1,1
+access.diagnosis,access_diagnosis,hr_hospital1.model_diagnosis,base.group_user,1,1,1,1
 access.appointment.pharmacy.lines,access_appointment_pharmacy_lines,hr_hospital1.model_appointment_pharmacy_lines,base.group_user,1,1,1,1
 access.create.appointment.wizard,access_create_appointment_wizard,hr_hospital1.model_create_appointment_wizard,base.group_user,1,1,1,1
 access.search.appointment.wizard,access_search_appointment_wizard,hr_hospital1.model_search_appointment_wizard,base.group_user,1,1,1,1
+access.doctor.reassignment.wizard,access_doctor_reassignment_wizard,hr_hospital1.model_doctor_reassignment_wizard,base.group_user,1,1,1,1
+access.create.report.wizard,access_create_report_wizard,hr_hospital1.model_create_report_wizard,base.group_user,1,1,1,1

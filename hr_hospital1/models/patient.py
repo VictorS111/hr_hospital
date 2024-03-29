@@ -28,9 +28,9 @@ class HospitalPatient(models.Model):
     appointment_count = fields.Integer(string='Appointment Count', compute='_compute_appointment_count')
     image = fields.Binary(string="Patient Image")
 
-    doctor2_id = fields.Many2one('hospital.doctor', string='Doctors',
+    doctor_id = fields.Many2one('hospital.doctor', string='Doctor',
                                  domain="[('doctor_role', '!=', 'intern')]")
-    # doctor_id = fields.Char(related='hospital.doctor', string='Doctors')
+    # doctor2_id = fields.Char(related='hospital.doctor', string='Doctors')
     appointment_ids = fields.One2many('hospital.appointment', 'patient_id',
                                       string="Appointments")
 
@@ -81,11 +81,11 @@ class HospitalPatient(models.Model):
         else:
             self.is_child = False
 
-    @api.onchange('doctor_id')
-    def doctor_gender(self):
-        for rec in self:
-            if rec.doctor_id:
-                rec.gender_id = rec.doctor_id.gender
+    # @api.onchange('doctor_id')
+    # def doctor_gender(self):
+    #     for rec in self:
+    #         if rec.doctor_id:
+    #             rec.gender_id = rec.doctor_id.gender
 
     # def name_get(self):
     #     result = []

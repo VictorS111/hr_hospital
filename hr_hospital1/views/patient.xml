@@ -30,7 +30,7 @@
                     <group>
                         <field name="gender" invisible="context.get('hide_gender')"/>
                         <field name="active" invisible="1"/>
-                        <field name="doctor2_id"/>
+                        <field name="doctor_id"/>
                         <field name="capitalized_name"/>
                         <field name="notes"/>
                     </group>
@@ -83,7 +83,7 @@
                 <field name="name"/>
                 <field name="age"/>
                 <field name="gender"/>
-                <!--                <field name="doctor_id"/>-->
+                <field name="doctor_id"/>
                 <field name="capitalized_name"/>
             </tree>
         </field>
@@ -130,5 +130,12 @@
             parent="menu_patient_master"
             action="action_hospital_patient"
             sequence="0"/>
+
+    <menuitem
+            id="menu_doctor_reassignment"
+            name="Doctor Reassignment"
+            parent="menu_patient_master"
+            action="action_doctor_reassignment"
+            sequence="20"/>
 
 </odoo>

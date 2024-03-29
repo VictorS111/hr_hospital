@@ -26,8 +26,8 @@ class HospitalAppointment(models.Model):
         ('in_consultation', 'In Consultation'),
         ('done', 'Done'),
         ('cancel', 'Cancelled')], default='draft', string="Status", required=True)
-    doctor_id = fields.Many2one('res.users', string="Doctor", tracking=True)
-    doctor2_id = fields.Many2one('hospital.doctor', string="Doctor_2", tracking=True)
+    doctor2_id = fields.Many2one('res.users', string="Doctor_2", tracking=True)
+    doctor_id = fields.Many2one('hospital.doctor', string="Doctor", tracking=True)
     pharmacy_line_ids = fields.One2many('appointment.pharmacy.lines',
                                         'appointment_id', string='Pharmacy Lines')
     notes = fields.Text(string="Notes")

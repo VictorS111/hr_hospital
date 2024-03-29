@@ -31,4 +31,9 @@
             parent="menu_hospital_root"
             sequence="0"/>
 
+    <menuitem
+            id="menu_diagnosis_master"
+            name="Diagnosis"
+            parent="menu_hospital_root"
+            sequence="10"/>
 </odoo>

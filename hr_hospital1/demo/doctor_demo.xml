@@ -19,9 +19,9 @@
         <field name="gender">male</field>
     </record>
 
-     <record id="doctor4" model="hospital.doctor">
+    <record id="doctor4" model="hospital.doctor">
         <field name="doctor_name">Katya</field>
-         <field name="age">32</field>
+        <field name="age">32</field>
         <field name="gender">female</field>
     </record>
 

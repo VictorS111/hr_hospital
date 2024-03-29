@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_doctor_reassignment_form" model="ir.ui.view">
+        <field name="name">doctor.reassignment.wizard.form</field>
+        <field name="model">doctor.reassignment.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Doctor Reassignment">
+                <group>
+                    <field name="doctor_id"/>
+                </group>
+                <footer>
+                    <button name="action_doctor_reassignment" type="object" string="Doctor Reassignment"
+                       class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_doctor_reassignment" model="ir.actions.act_window">
+        <field name="name">View Appointment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">doctor.reassignment.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_doctor_reassignment_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>
