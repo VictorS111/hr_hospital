@@ -31,6 +31,17 @@
         <field name="binding_type">report</field>
     </record>
 
+
+    <record id="report_appointment" model="ir.actions.report">
+        <field name="name">Appointment</field>
+        <field name="model">hospital.appointment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hr_hospital1.appointment_report</field>
+        <field name="report_file">hr_hospital1.appointment_report</field>
+        <field name="binding_model_id" ref="model_hospital_appointment"/>
+        <field name="binding_type">report</field>
+    </record>
+
 <!--    <record id="report_patient_card_xls" model="ir.actions.report">-->
 <!--        <field name="name">Patient Card Excel</field>-->
 <!--        <field name="model">hospital.patient</field>-->

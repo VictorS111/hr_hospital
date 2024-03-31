@@ -16,6 +16,7 @@ class HospitalAppointment(models.Model):
     ref = fields.Char(string="Reference", help="Reference from patient record",
                       default=lambda self: _('New'))
     prescription = fields.Html(string="Prescription")
+    amount = fields.Float(string="Total Amount")
     priority = fields.Selection([
         ('0', 'Normal'),
         ('1', 'Low'),
@@ -28,6 +29,7 @@ class HospitalAppointment(models.Model):
         ('cancel', 'Cancelled')], default='draft', string="Status", required=True)
     doctor2_id = fields.Many2one('res.users', string="Doctor_2", tracking=True)
     doctor_id = fields.Many2one('hospital.doctor', string="Doctor", tracking=True)
+    disease_id = fields.Many2one('disease', string="Disease", tracking=True)
     pharmacy_line_ids = fields.One2many('appointment.pharmacy.lines',
                                         'appointment_id', string='Pharmacy Lines')
     notes = fields.Text(string="Notes")

@@ -22,6 +22,7 @@
         'views/female_patient.xml',
         'views/appointment.xml',
         'report/patient_details_template.xml',
+        'report/appointment.xml',
         'report/patient_card.xml',
         'report/report_card.xml',
         'report/report.xml',
