@@ -2,8 +2,8 @@
 <odoo>
 
     <template id="report_patient_id_card">
-        <t t-call="web.basic_layout">
-            <t t-foreach="docs" t-as="o">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.basic_layout">
                 <div class="page">
                     <div class="oe_structure"/>
                     <div class="row">
@@ -16,7 +16,7 @@
                                                  t-att-src="'/web/static/img/placeholder.png'" height="140"
                                                  border="1" width="120"/>
                                             <img t-if="o.image"
-                                                 t-attf-src="data:image/jpg;base64,{{o.image}}"
+                                                 t-att-src="'data:image/jpg;base64,%s' % to_text(o.image)"
                                                  height="140" border="1" width="120"/>
                                         </p>
                                     </td>
@@ -27,11 +27,10 @@
                                                     <span t-field="o.name"/>
                                                 </td>
                                             </tr>
-                                            <br/>
                                             <tr>
                                                 <td>
                                                     <span>
-                                                        <strong>Age</strong>
+                                                        <strong>Age:</strong>
                                                     </span>
                                                 </td>
                                                 <td>
@@ -41,11 +40,10 @@
                                                     <span t-field="o.age"/>
                                                 </td>
                                             </tr>
-                                            <br/>
                                             <tr>
                                                 <td>
                                                     <span>
-                                                        <strong>Reference</strong>
+                                                        <strong>Reference:</strong>
                                                     </span>
                                                 </td>
                                                 <td>
@@ -56,51 +54,6 @@
                                                 </td>
                                             </tr>
                                         </table>
-                                        <br/>
-
-                                        <t t-if="o.appointment_ids">
-                                            <span>Appointment Details</span>
-                                            <table class="table table-sm o_main_table" name="appointment">
-                                                <thead>
-                                                    <tr>
-                                                        <th name="th_doctor" class="text-left">
-                                                            <span>Doctor</span>
-                                                        </th>
-                                                        <th name="th_appointment_time" class="text-left">
-                                                            <span>Appointment Time</span>
-                                                        </th>
-                                                        <th name="th_state" class="text-left">
-                                                            <span>Status</span>
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <t t-set="appointment_count" t-value="0"/>
-                                                <t t-foreach="o.appointment_ids" t-as="line">
-                                                    <t t-set="appointment_count" t-value="appointment_count + 1"/>
-                                                    <tr>
-                                                        <td>
-                                                            <span t-field="line.doctor2_id.doctor_name"/>
-                                                        </td>
-                                                        <td>
-                                                            <span t-field="line.appointment_time"/>
-                                                        </td>
-                                                        <td>
-                                                            <span t-field="line.state"/>
-                                                        </td>
-                                                    </tr>
-                                                </t>
-
-                                                <tr>
-                                                    <td colspan="2">
-                                                        <strong>Total Appointments</strong>
-                                                    </td>
-                                                    <td>
-                                                        <t t-esc="appointment_count"/>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </t>
-
                                     </td>
                                 </tr>
                             </table>
